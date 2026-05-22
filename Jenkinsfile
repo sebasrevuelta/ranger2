@@ -74,7 +74,7 @@ stage('semgrep-scan') {
           echo "Maven version:"
           mvn -version
 
-          semgrep ci --supply-chain --allow-local-builds --x-mem-policy=aggressive
+          semgrep ci --supply-chain --allow-local-builds
         '
 
       SCAN_EXIT_CODE=$?
