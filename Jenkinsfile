@@ -40,7 +40,7 @@ pipeline {
 stage('semgrep-scan') {
   steps {
     sh '''
-      docker pull semgrep/semgrep:1.157.0
+      docker pull semgrep/semgrep:1.163.0
 
       CONTAINER_NAME="semgrep-main-${BUILD_NUMBER}"
 
@@ -64,7 +64,7 @@ stage('semgrep-scan') {
         -e SEMGREP_REPO_NAME="$SEMGREP_REPO_NAME" \
         -v "$(pwd):$(pwd)" --workdir "$(pwd)" \
         --entrypoint /bin/sh \
-        semgrep/semgrep:1.157.0 \
+        semgrep/semgrep:1.163.0 \
         -lc '
           apk add --no-cache openjdk17-jdk maven
 
