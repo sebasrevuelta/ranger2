@@ -58,12 +58,12 @@ stage('semgrep-scan') {
       STATS_PID=$!
 
       docker run --name "$CONTAINER_NAME" --rm \
-        --memory=2g \
-        --memory-swap=2g \
+        --memory=8g \
+        --memory-swap=8g \
         -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
         -e SEMGREP_REPO_NAME=$SEMGREP_REPO_NAME \
         -v "$(pwd):$(pwd)" --workdir $(pwd) \
-        semgrep/semgrep semgrep ci --supply-chain --allow-local-builds
+        semgrep/semgrep:1.157.0 semgrep ci --supply-chain --allow-local-builds
 
       SCAN_EXIT_CODE=$?
 
