@@ -40,7 +40,7 @@ pipeline {
 stage('semgrep-scan') {
   steps {
     sh '''
-      docker pull semgrep/semgrep
+      docker pull semgrep/semgrep:1.157.0
 
       CONTAINER_NAME="semgrep-main-${BUILD_NUMBER}"
 
