@@ -63,7 +63,7 @@ stage('semgrep-scan') {
         -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
         -e SEMGREP_REPO_NAME=$SEMGREP_REPO_NAME \
         -v "$(pwd):$(pwd)" --workdir $(pwd) \
-        semgrep/semgrep:1.157.0 semgrep ci --supply-chain --allow-local-builds
+        semgrep/semgrep:1.157.0 semgrep ci --supply-chain --allow-local-builds --x-mem-policy=aggressive
 
       SCAN_EXIT_CODE=$?
 
