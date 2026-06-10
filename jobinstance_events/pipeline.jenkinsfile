@@ -1,0 +1,36 @@
+pipeline {
+  agent any
+
+  environment {
+    SERVICE_NAME = 'jobinstance_events'
+    PYTHON_VERSION = '3.12'
+  }
+
+  stages {
+    stage('Install') {
+      steps {
+        sh 'python3 -m venv .venv'
+        sh '. .venv/bin/activate && pip install --upgrade pip'
+        sh '. .venv/bin/activate && pip install -r jobinstance_events/requirements.txt'
+      }
+    }
+
+    stage('Unit Tests') {
+      steps {
+        sh '. .venv/bin/activate && pytest tests/jobinstance_events'
+      }
+    }
+
+    stage('Package') {
+      steps {
+        sh 'docker build -f jobinstance_events/Dockerfile -t shuttle/jobinstance_events:${BUILD_NUMBER} .'
+      }
+    }
+  }
+
+  post {
+    always {
+      archiveArtifacts artifacts: 'jobinstance_events/package.yaml', fingerprint: true
+    }
+  }
+}

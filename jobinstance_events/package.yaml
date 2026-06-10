@@ -1,0 +1,16 @@
+name: jobinstance_events
+type: python-service
+owner: shuttle-services
+description: Processes job instance lifecycle and reporting events.
+runtime:
+  python: "3.12"
+  entrypoint: jobinstance_events.wsgi:app
+docker:
+  dockerfile: jobinstance_events/Dockerfile
+health:
+  liveness: /healthz
+  readiness: /readyz
+dependencies:
+  - services_shared
+  - google-cloud-pubsub
+  - flask-restx

@@ -1,0 +1,19 @@
+# Direct dependencies for jobinstance_events.
+# Compile with:
+#   pip-compile --allow-unsafe --constraint=constraints.txt --no-emit-index-url --no-strip-extras jobinstance_events/requirements.in
+
+flask
+flask-restx
+gunicorn
+gevent
+google-cloud-pubsub
+google-cloud-storage
+opentelemetry-distro
+opentelemetry-exporter-otlp
+opentelemetry-instrumentation-flask
+opentelemetry-instrumentation-requests
+pymongo
+python-dateutil
+pyyaml
+requests
+ujson

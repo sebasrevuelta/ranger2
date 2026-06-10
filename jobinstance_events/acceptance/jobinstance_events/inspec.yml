@@ -1,0 +1,9 @@
+name: jobinstance_events
+title: jobinstance_events acceptance profile
+maintainer: Shuttle Services
+copyright: Shuttle Services
+license: Proprietary
+summary: Acceptance tests for the jobinstance_events service
+version: 0.1.0
+supports:
+  - os-family: linux
