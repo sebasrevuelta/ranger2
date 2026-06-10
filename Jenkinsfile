@@ -40,7 +40,7 @@ pipeline {
 stage('semgrep-scan') {
   steps {
     sh '''
-      docker pull semgrep/semgrep:1.163.0
+      docker pull semgrep/semgrep
 
       CONTAINER_NAME="semgrep-main-${BUILD_NUMBER}"
 
@@ -64,7 +64,7 @@ stage('semgrep-scan') {
         -e SEMGREP_REPO_NAME="$SEMGREP_REPO_NAME" \
         -v "$(pwd):$(pwd)" --workdir "$(pwd)" \
         --entrypoint /bin/sh \
-        semgrep/semgrep:1.163.0 \
+        semgrep/semgrep \
         -lc '
           apk add --no-cache openjdk17-jdk maven
 
@@ -74,7 +74,7 @@ stage('semgrep-scan') {
           echo "Maven version:"
           mvn -version
 
-          semgrep ci --supply-chain --allow-local-builds
+          semgrep ci --supply-chain --subdir=jobinstance_events --json --allow-local-builds --max-memory=6144 --x-mem-policy=aggressive
         '
 
       SCAN_EXIT_CODE=$?
