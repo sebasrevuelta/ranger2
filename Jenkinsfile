@@ -74,7 +74,10 @@ stage('semgrep-scan') {
           echo "Maven version:"
           mvn -version
 
-          sh "ulimit -a && semgrep ci --supply-chain --subdir=jobinstance_events --json --allow-local-builds --max-memory=6144 --x-mem-policy=aggressive"
+          echo "===== ulimit -a ====="
+          ulimit -a
+          echo "===== semgrep ci ====="
+          semgrep ci --supply-chain --subdir=jobinstance_events --json --allow-local-builds --max-memory=6144 --x-mem-policy=aggressive
         '
 
       SCAN_EXIT_CODE=$?
